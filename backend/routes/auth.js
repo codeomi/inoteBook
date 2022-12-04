@@ -1,5 +1,6 @@
 //AUTHENTICATION RELATED END-POINTS WILL GO HERE
 const express = require("express")//importing express
+
 const User = require('../models/User')//importing user
 const router = express.Router()
 const { body, validationResult } = require('express-validator')
