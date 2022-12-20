@@ -4,14 +4,67 @@ import { useState } from 'react'
 import NoteContext from './noteContext'
 
 const NoteState = (props) => {
-    const s1 = {
-        "name": "Omkar",
-        "class": "5b"
+const initialNotes=[
+    {
+      "_id": "63996f6bbdfb917f4228cbd7",
+      "user": "63981f32d18dc07490654f7d",
+      "title": "my title",
+      "description": "please wake up early",
+      "tag": "alarm",
+      "date": "2022-12-14T06:38:35.996Z",
+      "__v": 0
+    },
+    {
+      "_id": "63996f6cbdfb917f4228cbd9",
+      "user": "63981f32d18dc07490654f7d",
+      "title": "my title",
+      "description": "please wake up early",
+      "tag": "alarm",
+      "date": "2022-12-14T06:38:36.948Z",
+      "__v": 0
+    },
+    {
+      "_id": "63996f6bbdfb917f4228cbd7",
+      "user": "63981f32d18dc07490654f7d",
+      "title": "my title",
+      "description": "please wake up early",
+      "tag": "alarm",
+      "date": "2022-12-14T06:38:35.996Z",
+      "__v": 0
+    },
+    {
+      "_id": "63996f6cbdfb917f4228cbd9",
+      "user": "63981f32d18dc07490654f7d",
+      "title": "my title",
+      "description": "please wake up early",
+      "tag": "alarm",
+      "date": "2022-12-14T06:38:36.948Z",
+      "__v": 0
+    },
+    {
+      "_id": "63996f6bbdfb917f4228cbd7",
+      "user": "63981f32d18dc07490654f7d",
+      "title": "my title",
+      "description": "please wake up early",
+      "tag": "alarm",
+      "date": "2022-12-14T06:38:35.996Z",
+      "__v": 0
+    },
+    {
+      "_id": "63996f6cbdfb917f4228cbd9",
+      "user": "63981f32d18dc07490654f7d",
+      "title": "my title",
+      "description": "please wake up early",
+      "tag": "alarm",
+      "date": "2022-12-14T06:38:36.948Z",
+      "__v": 0
     }
+  ]
+  const [notes, setNotes] = useState(initialNotes)
    
     
     return (
-        <NoteContext.Provider>
+        <NoteContext.Provider value={{notes, setNotes}}>
             {props.children}
         </NoteContext.Provider>
     )
