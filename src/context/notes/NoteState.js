@@ -6,7 +6,7 @@ import NoteContext from './noteContext'
 const NoteState = (props) => {
 const initialNotes=[
     {
-      "_id": "63996f6bbdfb917f4228cbd7",
+      "_id": "63996f6bbdfb917f42283cbd7",
       "user": "63981f32d18dc07490654f7d",
       "title": "my title",
       "description": "please wake up early",
@@ -15,7 +15,7 @@ const initialNotes=[
       "__v": 0
     },
     {
-      "_id": "63996f6cbdfb917f4228cbd9",
+      "_id": "63996f6cbdfb9174f4228cbd9",
       "user": "63981f32d18dc07490654f7d",
       "title": "my title",
       "description": "please wake up early",
@@ -24,7 +24,7 @@ const initialNotes=[
       "__v": 0
     },
     {
-      "_id": "63996f6bbdfb917f4228cbd7",
+      "_id": "63996f6bbdfb917f42528cbd7",
       "user": "63981f32d18dc07490654f7d",
       "title": "my title",
       "description": "please wake up early",
@@ -33,7 +33,7 @@ const initialNotes=[
       "__v": 0
     },
     {
-      "_id": "63996f6cbdfb917f4228cbd9",
+      "_id": "63996f6cbd2fb9157f4228cbd9",
       "user": "63981f32d18dc07490654f7d",
       "title": "my title",
       "description": "please wake up early",
@@ -42,7 +42,7 @@ const initialNotes=[
       "__v": 0
     },
     {
-      "_id": "63996f6bbdfb917f4228cbd7",
+      "_id": "63996f6bbdfb9117f4228cbd7",
       "user": "63981f32d18dc07490654f7d",
       "title": "my title",
       "description": "please wake up early",
@@ -51,7 +51,7 @@ const initialNotes=[
       "__v": 0
     },
     {
-      "_id": "63996f6cbdfb917f4228cbd9",
+      "_id": "63996f6cbdfb5917f4228cbd9",
       "user": "63981f32d18dc07490654f7d",
       "title": "my title",
       "description": "please wake up early",
