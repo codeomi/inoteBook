@@ -4,7 +4,7 @@ import { useState } from 'react'
 import NoteContext from './noteContext'
 
 const NoteState = (props) => {
-const initialNotes=[
+  const initialNotes = [
     {
       "_id": "63996f6bbdfb917f42283cbd7",
       "user": "63981f32d18dc07490654f7d",
@@ -63,9 +63,10 @@ const initialNotes=[
   const [notes, setNotes] = useState(initialNotes)
 
   //Add a note
-  const addNote=(title, description, tag)=>{
+  const addNote = (title, description, tag) => {
+    //TODO: api call
     console.log("Adding a new note")
-    const note= {
+    const note = {
       "_id": "63996f6cbdfb5917f42282cbd9",
       "user": "63981f32d18dc07490654f7d",
       "title": title,
@@ -76,20 +77,27 @@ const initialNotes=[
     }
     setNotes(notes.concat(note))
   }
-  
+
   //Delete a note
-  const deleteNote=()=>{}
-  
+  const deleteNote = (id) => {
+    //TODO: api call
+    console.log("delete note" + id)
+    //filter will crate a new array filled with elements which pass the test
+    const newNotes = notes.filter((note) => { return note._id !== id })
+    //newNotes is equale to notes which does not matches the id and thereby deleting the note
+    setNotes(newNotes)
+  }
+
   //Edit a note
-  const editNote=()=>{}
-  
-   
-    
-    return (
-        <NoteContext.Provider value={{notes, setNotes, addNote, deleteNote, editNote}}>
-            {props.children}
-        </NoteContext.Provider>
-    )
+  const editNote = (id, title, description, tag) => { }
+
+
+
+  return (
+    <NoteContext.Provider value={{ notes, setNotes, addNote, deleteNote, editNote }}>
+      {props.children}
+    </NoteContext.Provider>
+  )
 }
 
 export default NoteState
