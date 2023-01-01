@@ -5,7 +5,7 @@ import Addnote from './Addnote'
 
 const Notes = () => {
     const context = useContext(noteContext)
-    const { notes, getNotes, addNote } = context
+    const { notes, getNotes, editNote } = context
     useEffect(() => {
         return () => {
             getNotes()
@@ -13,17 +13,18 @@ const Notes = () => {
         }
     }, [])
     const ref = useRef(null)
+    const closeModal = useRef(null)
+    const [note, setNote] = useState({ id: "", etitle: "", edescription: "", etag: "" })
 
     const updateNote = (currentNote) => {
         ref.current.click()
-        setNote({ etitle: currentNote.title, edescription: currentNote.description, etag: currentNote.tag })
+        setNote({ id: currentNote._id, etitle: currentNote.title, edescription: currentNote.description, etag: currentNote.tag })
     }
 
-    const [note, setNote] = useState({ etitle: "", edescription: "", etag: "" })
 
     const handleClick = (e) => {
-        console.log(note);
-        e.preventDefault()
+        editNote(note.id, note.etitle, note.edescription, note.etag)
+        closeModal.current.click()
     }
 
     const onChange = (e) => {
@@ -53,13 +54,13 @@ const Notes = () => {
                                     <div className="mb-3 row">
                                         <label htmlFor="title" className="row-sm-2 col-form-label">Title</label>
                                         <div className="col-sm-10">
-                                            <input type="title" className="form-control" id="etitle" name="etitle" value={note.etitle} onChange={onChange} />
+                                            <input type="text" className="form-control" id="etitle" name="etitle" value={note.etitle} onChange={onChange} />
                                         </div>
                                     </div>
                                     <div className="mb-3 row">
                                         <label htmlFor="description" className="row-sm-2 col-form-label">Description</label>
                                         <div className="col-sm-10">
-                                            <input type="description" className="form-control" id="edescription" value={note.edescription} name="edescription" onChange={onChange} />
+                                            <input type="text" className="form-control" id="edescription" value={note.edescription} name="edescription" onChange={onChange} />
                                         </div>
                                     </div>
                                     <div className="mb-3 row">
@@ -73,7 +74,7 @@ const Notes = () => {
                             </div>
                         </div>
                         <div className="modal-footer">
-                            <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button ref={closeModal} type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
                             <button onClick={handleClick} type="button" className="btn btn-primary">Update Note</button>
                         </div>
                     </div>
@@ -82,7 +83,7 @@ const Notes = () => {
 
             <div className='row my-3'>
                 <h3>Your note</h3>
-                {notes.map((note) => {
+                {notes?.map((note) => {
                     return <NoteItem key={note._id} updateNote={updateNote} note={note} />
                 })}
             </div>

@@ -9,7 +9,7 @@ const NoteState = (props) => {
   const [notes, setNotes] = useState(initialNotes)
 
   //Add a note
-  const addNote = async (title, description, tag) => {
+  const addNote = async (id, title, description, tag) => {
     //TODO: api call
     const response = await fetch(`${host}/api/notes/addnote`, {
       method: 'POST', // *GET, POST, PUT, DELETE, etc.
@@ -19,10 +19,10 @@ const NoteState = (props) => {
       },
       body: JSON.stringify({ title, description, tag })
     });
-
-    console.log("Adding a new note")
+    const json = await response.json()
+    const newNote= JSON.parse(JSON.stringify(notes))
     const note = {
-      "_id": "63996f6cbdfb5917f42282cbd9",
+      "_id": id,
       "user": "63981f32d18dc07490654f7d",
       "title": title,
       "description": description,
@@ -30,10 +30,10 @@ const NoteState = (props) => {
       "date": "2022-12-14T06:38:36.948Z",
       "__v": 0
     }
-    setNotes(notes.concat(note))
+    setNotes(newNote.concat(note))
   }
 
-  
+
   //Get all notes
   const getNotes = async () => {
     //TODO: api call
@@ -45,7 +45,6 @@ const NoteState = (props) => {
       },
     });
     const json = await response.json()
-    console.log(json)
     setNotes(json)
   }
 
@@ -61,8 +60,6 @@ const NoteState = (props) => {
     });
     const json = await response.json()
     setNotes(json)
-    console.log(json)
-    console.log("delete note " + id)
     //filter will crate a new array filled with elements which pass the test
     const newNotes = notes.filter((note) => { return note._id !== id })
     //newNotes is equale to notes which does not matches the id and thereby deleting the note
@@ -73,24 +70,27 @@ const NoteState = (props) => {
   const editNote = async (id, title, description, tag) => {
     //API call
     const response = await fetch(`${host}/api/notes/updatenote/${id}`, {
-      method: 'POST', // *GET, POST, PUT, DELETE, etc.
+      method: 'PUT', // *GET, POST, PUT, DELETE, etc.
       headers: {
         'Content-Type': 'application/json',
         'auth-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjM5ODFmMzJkMThkYzA3NDkwNjU0ZjdkIn0sImlhdCI6MTY3MDkxMzg1OH0.V9QcEqU5aDaN2UW6E1B9JwMf1GPykpNAEPFMIONURWE'
       },
       body: JSON.stringify({ title, description, tag })
     });
-    const json = response.json();
-    setNotes(json)
+    const json = await response.json();
+    // setNotes(json)
 
+    const newNotes = JSON.parse(JSON.stringify(notes))
     for (let index = 0; index < notes.length; index++) {
-      const element = notes[index];
+      const element = newNotes[index];
       if (element._id === id) {
-        element.title = title
-        element.description = description
-        element.tag = tag
+        newNotes[index].title = title
+        newNotes[index].description = description
+        newNotes[index].tag = tag
+        break
       }
     }
+    setNotes(newNotes)
   }
 
 
