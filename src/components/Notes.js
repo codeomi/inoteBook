@@ -54,19 +54,19 @@ const Notes = () => {
                                     <div className="mb-3 row">
                                         <label htmlFor="title" className="row-sm-2 col-form-label">Title</label>
                                         <div className="col-sm-10">
-                                            <input type="text" className="form-control" id="etitle" name="etitle" value={note.etitle} onChange={onChange} />
+                                            <input type="text" className="form-control" id="etitle" name="etitle" value={note.etitle} onChange={onChange} minLength={5} required />
                                         </div>
                                     </div>
                                     <div className="mb-3 row">
                                         <label htmlFor="description" className="row-sm-2 col-form-label">Description</label>
                                         <div className="col-sm-10">
-                                            <input type="text" className="form-control" id="edescription" value={note.edescription} name="edescription" onChange={onChange} />
+                                            <input type="text" className="form-control" id="edescription" value={note.edescription} name="edescription" onChange={onChange} minLength={5} required />
                                         </div>
                                     </div>
                                     <div className="mb-3 row">
                                         <label htmlFor="tag" className="row-sm-2 col-form-label">Tag</label>
                                         <div className="col-sm-10">
-                                            <input type="tag" value={note.etag} className="form-control" id="etag" name="etag" onChange={onChange} />
+                                            <input type="tag" value={note.etag} className="form-control" id="etag" name="etag" onChange={onChange} minLength={5} required />
                                         </div>
                                     </div>
                                 </form>
@@ -75,14 +75,17 @@ const Notes = () => {
                         </div>
                         <div className="modal-footer">
                             <button ref={closeModal} type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button onClick={handleClick} type="button" className="btn btn-primary">Update Note</button>
+                            <button disabled={note.etitle.length<5 || note.edescription.length<5} onClick={handleClick} type="button" className="btn btn-primary">Update Note</button>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div className='row my-3'>
+            <div className='row my-4 mx-2'>
                 <h3>Your note</h3>
+                <div className="container">
+                    {notes.length === 0 && 'No notes to display.'}
+                </div>
                 {notes?.map((note) => {
                     return <NoteItem key={note._id} updateNote={updateNote} note={note} />
                 })}
