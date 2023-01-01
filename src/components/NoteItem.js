@@ -4,7 +4,7 @@ import noteContext from '../context/notes/noteContext'
 const NoteItem = (props) => {
     const context = useContext(noteContext)
     //this note is coming from map(note)
-    const { note } = props
+    const { note, updateNote } = props
     const { deleteNote, editNote } = context
 
     return (
@@ -14,7 +14,7 @@ const NoteItem = (props) => {
                     <h5 className="card-title">{note.title}</h5>
                     <p className="card-text">{note.description} </p>
                     <i className="fa fa-thin fa-trash mx-3" onClick={() => { deleteNote(note._id) }}></i>
-                    <i className="fa fa-light fa-pen-to-square" onClick={editNote(note._id)}></i>
+                    <i className="fa fa-light fa-pen-to-square" onClick={() => { updateNote(note) }}></i>
                 </div>
             </div>
         </div>

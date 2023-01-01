@@ -4,17 +4,17 @@ import noteContext from '../context/notes/noteContext'
 
 const Addnote = () => {
     const context = useContext(noteContext)
-    const {addNote}=context
+    const { addNote } = context
 
-    const [note, setNote] = useState({ title: "", description: "" ,tag:"default"})
-    
+    const [note, setNote] = useState({ title: "", description: "", tag: "default" })
+
     const handleClick = (e) => {
         e.preventDefault()
-        addNote(note.title, note.description, note.tag)
+        addNote(note._id, note.title, note.description, note.tag)
     }
 
     const onChange = (e) => {
-        setNote({...note,[e.target.name]:e.target.value})
+        setNote({ ...note, [e.target.name]: e.target.value })
     }
 
     return (
@@ -31,7 +31,13 @@ const Addnote = () => {
                     <div className="mb-3 row">
                         <label htmlFor="description" className="col-sm-2 col-form-label">Description</label>
                         <div className="col-sm-10">
-                            <input type="description" className="form-control" id="description" name="description"onChange={onChange} />
+                            <input type="description" className="form-control" id="description" name="description" onChange={onChange} />
+                        </div>
+                    </div>
+                    <div className="mb-3 row">
+                        <label htmlFor="tag" className="col-sm-2 col-form-label">Tag</label>
+                        <div className="col-sm-10">
+                            <input type="tag" className="form-control" id="tag" name="tag" onChange={onChange} />
                         </div>
                     </div>
                     <button className='tn btn-primary' type="submit" onClick={handleClick}>Add note</button>
