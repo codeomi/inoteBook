@@ -68,7 +68,7 @@ router.post('/login', [
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() })
   }
-
+  let success= false
   //destructuring email and password from the req.body
   const { email, password } = req.body
   try {
@@ -82,7 +82,7 @@ router.post('/login', [
     const passwordCompare = await bcrypt.compare(password, user.password)
     //if passwords does not match the below error.
     if (!passwordCompare)
-      return res.status(400).json({ error: "Please try login wth correct credntials(p)." })
+      return res.status(400).json({success, error: "Please try login wth correct credntials(p)." })
 
       //genereating token for that taking id
     const payLoad = {
@@ -92,7 +92,8 @@ router.post('/login', [
     }
     
     const authToken = jwt.sign(payLoad, JWT_SECRET) //token generated
-    res.json({ authToken })//response
+    success=true
+    res.json({success, authToken })//response
 
   } catch (error) {
     console.error(error.message)
