@@ -1,4 +1,5 @@
 import './App.css';
+import {useState} from 'react'
 import {
   BrowserRouter as Router,
   Routes,
@@ -13,22 +14,33 @@ import Login from './components/Login'
 import Signup from './components/Signup';
 
 function App() {
+  const [alert, setAlert] = useState(null);
+
+  const showAlert = (message, type)=>{
+      setAlert({
+        msg: message,
+        type: type
+      })
+      setTimeout(() => {
+          setAlert(null);
+      }, 1500);
+  }
 
   return (
     <>
       <NoteState>
         <Router>
           <Navbar></Navbar>
-          <Alert message="This is an amazing react app" />
+          <Alert alert={alert}/>
           <div className="container">
             <Routes>
-              <Route exact path="/home" element={<Home />}>
+              <Route exact path="/home" element={<Home showAlert={showAlert} />}>
               </Route>
               <Route exact path="/about" element={<About />}>
               </Route>
-              <Route exact path="/login" element={<Login />}>
+              <Route exact path="/login" element={<Login showAlert={showAlert} />}>
               </Route>
-              <Route exact path="/signup" element={<Signup />}>
+              <Route exact path="/signup" element={<Signup showAlert={showAlert}/>}>
               </Route>
             </Routes>
           </div>
