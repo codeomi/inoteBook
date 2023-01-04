@@ -20,15 +20,16 @@ router.post('/createuser', [
 ], async (req, res) => {
   //f there are errors, return bad request and the errors
   const errors = validationResult(req);
+  let success= false
   if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() });
+    return res.status(400).json({success, errors: errors.array() });
   }
 
   try {
     //check wether the user with this email exist already
     let user = await User.findOne({ email: req.body.email })
     if (user) {
-      return res.status(400).json({ error: "Sorry! The user with this email already exist" })
+      return res.status(400).json({ success, error: "Sorry! The user with this email already exist" })
     }
 
     const salt = await bcrypt.genSalt(10) //adding salt to the password
@@ -46,7 +47,8 @@ router.post('/createuser', [
       }
     }
     const authToken = jwt.sign(data, JWT_SECRET)
-    res.json({ authToken })
+    success= true
+    res.json({ success, authToken })
     // res.json(user)
   }
 
@@ -68,7 +70,7 @@ router.post('/login', [
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() })
   }
-
+  let success= false
   //destructuring email and password from the req.body
   const { email, password } = req.body
   try {
@@ -82,7 +84,7 @@ router.post('/login', [
     const passwordCompare = await bcrypt.compare(password, user.password)
     //if passwords does not match the below error.
     if (!passwordCompare)
-      return res.status(400).json({ error: "Please try login wth correct credntials(p)." })
+      return res.status(400).json({success, error: "Please try login wth correct credntials(p)." })
 
       //genereating token for that taking id
     const payLoad = {
@@ -92,7 +94,8 @@ router.post('/login', [
     }
     
     const authToken = jwt.sign(payLoad, JWT_SECRET) //token generated
-    res.json({ authToken })//response
+    success=true
+    res.json({success, authToken })//response
 
   } catch (error) {
     console.error(error.message)
