@@ -24,7 +24,7 @@ export default function Signup(props) {
             props.showAlert("Account Created Successfully", "success")
         }
         else {
-           props.showAlert("Invalid credentials", "danger")
+            props.showAlert("Invalid credentials", "danger")
         }
     }
 
@@ -33,11 +33,12 @@ export default function Signup(props) {
     }
 
     return (
-        <div className='container'>
+        <div className="mt-2">
+            <h2 className='my-2'>Create an account to use iNotebook</h2>
             <form onSubmit={handleSubmit}>
                 <div className="form-group my-3">
                     <label htmlFor="exampleInputName">Name</label>
-                    <input type="name" className="form-control" id="name" name="name" aria-describedby="name" onChange={onChange} placeholder="Enter name"  required/>
+                    <input type="name" className="form-control" id="name" name="name" aria-describedby="name" onChange={onChange} placeholder="Enter name" required />
                 </div>
                 <div className="form-group my-3">
                     <label htmlFor="exampleInputEmail1">Email address</label>
